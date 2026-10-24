@@ -42,6 +42,7 @@ h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;margin:0
 .hero{background:radial-gradient(ellipse at 50% 0,#8E1B25 0,var(--maroon) 70%);color:var(--cream);text-align:center;padding:40px 20px 9vh;position:relative}
 .hero::before,.hero::after{content:"";position:absolute;top:0;bottom:0;width:10px;border:solid var(--gold);border-width:0 1px}
 .hero::before{left:10px}.hero::after{right:10px}
+a.off,.btn.off{opacity:.45;filter:grayscale(1);pointer-events:none;cursor:not-allowed}
 .hero p{margin:0}
 .om{width:72px;height:auto;margin:0 auto 8px;display:block}
 .shloka{font-family:"Noto Serif Devanagari",serif;font-weight:500;color:var(--gold);font-size:clamp(1.45rem,6.4vw,2.15rem);line-height:1.3;text-shadow:0 0 18px rgba(232,169,59,.35);margin-bottom:22px!important}
@@ -298,6 +299,8 @@ function tick(){
 }
 tick();setInterval(tick,1000);
 var env=document.getElementById("env"),intro=document.getElementById("intro"),opening=false;
+// From 26 Nov 2026 (IST) every link on the page is switched off
+(function(){if(Date.now()>=new Date("2026-11-26T00:00:00+05:30").getTime()){var a=document.querySelectorAll("a[href]");for(var i=0;i<a.length;i++){a[i].removeAttribute("href");a[i].removeAttribute("target");a[i].classList.add("off");a[i].setAttribute("aria-disabled","true");a[i].setAttribute("tabindex","-1");}}})();
 var song=document.getElementById("song"),musicBtn=document.getElementById("music");
 function setMusicUI(){var on=!song.paused;musicBtn.textContent=on?"♪":"🔇";musicBtn.setAttribute("aria-label",on?"Mute music":"Play music");}
 musicBtn.addEventListener("click",function(){if(song.paused){song.play().catch(function(){});}else{song.pause();}});
